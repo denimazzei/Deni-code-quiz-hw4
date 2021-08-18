@@ -4,9 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/style.css" />
     <title>Code Quiz</title>
 </head>
 <body>
+    <header>
+        <h1>Code Quiz</h1>
+    </header>
+    <main>
+        <div id="quizContainer">
+        <button id="startQuiz">Start Quiz</button>
+        <div id="quizQuestions"></div>
+            <div id="question"></div>
+            <div id="questionImage"></div>
+            <div id="multipleChoice"></div>
+                <div class="option" id="A" onclick="checkAnswer ('A')"></div>
+                <div class="option" id="B" onclick="checkAnswer ('B')"></div>
+                <div class="option" id="C" onclick="checkAnswer ('C')"></div>
+        </div>
+       
+        <div id="timer">
+            <span id="counter"></span>
+            <span id="btimeGuage"></span>
+            <span id="timeGuage"></span>
+        </div>
+
+        <div id="progress"></div>
+    </div>
     
+    <div id="scoreContainer" stle="display: none"></div>
+
+        <div id="results"></div>
+
+    </main>
+    <script src="Javascript/javascript.js"></script>
 </body>
 </html>
