@@ -1,0 +1,26 @@
+
+body{
+    font-size: 20px;
+    font-family: monospace;
+}
+
+.card-text {
+    font-weight: 900;
+}
+
+.card-footer {
+    height: 1.5rem;
+}
+
+#startBtn {
+    display: block;
+    padding-left: auto;
+    padding-right: auto;
+}
+
+@media (min-width: 768) {
+    #timeP,
+    #viewHSA {
+        text-align: center;
+    }
+}

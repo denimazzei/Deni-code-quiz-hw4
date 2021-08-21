@@ -5,38 +5,126 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/style.css" />
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous"
+  />
     <title>Code Quiz</title>
 </head>
 <body>
-    <header>
-        <h1>Code Quiz</h1>
-    </header>
-    <main>
-        <div id="quizContainer">
-        <button id="startQuiz">Start Quiz</button>
-        <div id="quizQuestions"></div>
-            <div id="question"></div>
-            <div id="questionImage"></div>
-            <div id="multipleChoice"></div>
-                <div class="option" id="A" onclick="checkAnswer ('A')"></div>
-                <div class="option" id="B" onclick="checkAnswer ('B')"></div>
-                <div class="option" id="C" onclick="checkAnswer ('C')"></div>
+    <div class="container">
+        <header class="col text-center p-4" id="title">
+            <h1>Coding Quiz Challenge</h1>
+        </header>
+    <section
+        class="modal fade"
+        id="staticBackdrop"
+        data-backdrop="static"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="staticBackdropLabel">High Scores</h2>
+                    <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group" id=highScoresList></ul>
+                </div>
+                <div class="modal-footer">
+                    <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal">CLOSE</button>
+                    <button
+                    type="button"
+                    class="btn btn-primary"
+                    id="clearHighScoresBtn"></button>
+                </div>
+            </div>
         </div>
+    </section>
+
+    <section class="card">
+        <section class="card-header pt-0 pb-0">
+            <div class="row row-cols-2">
+                <div class="col">
+                    <a style="text-decoration: none;"
+                    id="viewHighScores"
+                    data-toggle="modal"
+                    data-target="#staticBackdrop"
+                    href="#">View High Scores</a>
+                </div>
+                <div class="col text-right">
+                    <p class="mb-0" id="timeP">Time Remainining <strong><span id="timeSpan"></span></strong></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="card-body">
+            <section class="card bg-dark text-white" id="introduction">
+                <div class="text-center mt-3">
+                    <h3 class="card-title">Welcome!</h3>
+                    <p class="card-text">Try to answer the following code questions in the given time.</p>
+                    
+                    <p class="card-text">NOTE: Incorrect answers will be penalized 3 seconds!</p>
+                </div>
+            </section>
+            <a href="#" class="btn btn-primary" id="start">Click Here to Start</a>
+
+        
+    <!--Quiz Section-->
+    <section id="quiz">
+            <h2 id="question">Question 1></h2>
+            <div class="row row-cols-1 row-cols-md-2">
+                <div id="col">
+                     <div class="list-group mb-4" id="answers"></div>
+                 </div>
+                 <div class="col">
+                </div>        
+            </div>
+    </section>
+
+    <!--Quiz Completed-->
        
-        <div id="timer">
-            <span id="counter"></span>
-            <span id="btimeGuage"></span>
-            <span id="timeGuage"></span>
+    <section id="allDone">
+        <div class="alert alert-success mt=0 mb-0">
+            <h3 class="alert-heading">All Done!</h3>
+            <hr />
+            <h4 class="mb-0">Here's Your Final Score <span id="finalScore">xx</span></h4>
+            <hr />
+            <form class="form-inline">
+                <input
+                class="form-control mr-2"
+                type="text"
+                id="initials"
+                placeholder="Enter your initials"
+                />
+                <button type="submit" class="btn btn-info" id="submit">SUBMIT</button>
+            </form>
         </div>
-
-        <div id="progress"></div>
-    </div>
+    </section>
     
-    <div id="scoreContainer" stle="display: none"></div>
+    <div class="card-footer text muted p-0">
+        <div class="progress" style="height: 100%;">
+            <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" style="width: 0%; height: 100%"></div>
+        </div>
+    </div>
+    <div class="alert alert-success mt-0 mb- pt-0 pb-0" id="assess-ft">
+        <strong></strong>
+    </div>
 
-        <div id="results"></div>
-
-    </main>
     <script src="Javascript/javascript.js"></script>
 </body>
 </html>
