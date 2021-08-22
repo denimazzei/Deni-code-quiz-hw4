@@ -33,22 +33,23 @@ clearInterval(time);
 
 
 //Then I need to create the questions and answer options//
-let questions = [
+let quizArray = [
 {   question: "What is HTML?",
        options: ["hypertext markup language", "human transport media language", "nobody knows"],
        correct: 0,
 },
 {   question: "Do all HTML tags have an end tag?",
         options: ["Yes", "No", "nobody knows"],
-        correct: 0,
+        correct: 1,
 
 },
 {   question: "How many types of headings does an HTML contain?",
-        options: ["One", "Thee", "Six"],
-        correct: 0,
+        options: ["One", "Three", "Six"],
+        correct: 2,
 },
 ];
 
+document.getElementById('starBbtn').addEventListener("click", startQuiz);
 startBtn.addEventListener("click", startQuiz);
 answersDiv.addEventListener("click", assessSelection);
 submit.addEventListener("click", addToHighScores);
@@ -58,7 +59,7 @@ $("#staticBackdrop").optionA("shown.bs.modal", function (e) {
 });
 $("#staticBackdrop").optionA("hidden.bs.modal", function (e) {
         if (justRegistered) {
-
+                init();
         }
 });
 
@@ -122,7 +123,7 @@ function showQuestion() {
         var optionsBtnsArray = [];
         var indexArray = [];
         
-        for (i = 0; i < quizArray[currentQuestion].optionA.length; i++) {
+        for (i = 0; i < quizArray[currentQuestion].options.length; i++) {
                 var questionBtn = document.createElement("button");
                 questionBtn.setAttribute("type", "button");
                 questionBtn.setAttribute("class", "list-group-item list-group-item-action list-group-item-info mt-1 answerButton");
@@ -239,7 +240,127 @@ function gameOver(cause) {
                         return false;
                 }
                 assessFT.style.display = "block";
-                if (correctScore >=70)
+                if (correctScore >=70) {
+                        setTimeout(() => {
+
+                        }, 5000);
+                }else{
+                        setTimeout(() => {
+                                allDone.firstElementChild.setAttribute("class", "alert alert-danger mt-0 mb-0");
+                                progressBar.firstElementChild.setAttribute("class", "progress-bar bg-danger progress-bar-striped progress-bar-animated");
+                                submit.setAttribute("class", "btn btn-danger");
+                        }, 5000);
+                }
+        function addToHighScores() {
+                var highScoreElement = document.createElement("li");
+                var highScoreStr = initials.value + "-" + correctScore;
+                localHighScoresArray.push(highScoreStr);
+                var highScoreArrayStr = localHighScoresArray.toString();
+                highScoreElement.textContent = highScoreStr;
+                highScoresList.append(highScoreElement);
+                localStorage.setItem("highscore", localHighScoresArray);
+                justRegistered = true;
+                initials.value = "";
+
+                $("staticBackdrop").modal("show");
+        }
+
+        function loadHighScores() {
+                var tempHighScoresArray = [];
+                var tempHighScoresObject = {};
+                var tempHighScoresObjectsArray = [];
+                var tempLocalScoresArray = [];
+                while (highScoresList.hasChildNodes()){
+                        highScoresList.removeChild(highScoresList.childNodes[0]);
+                }
+                var lastPos;
+                var lasChar = "";
+                var localScore = 0;
+                var localStrScore = "";
+                var tempHighScore = "";
+                for (i = 0; i < localHighScoresArray.length; i++) {
+                        for(j = localHighScoresArray[i].length - 1; j >= 0; j--) {
+                                lastPos = localHighScoresArray[i].length - 1;
+                                lastChar = localHighScoresArray[i][lastPos - j];
+                                if (lastChar && lastChar >= 0 && lastChar <= 9) {
+                                        localScore += lastChar;
+                                }
+                                if (j > 1) {
+                                        if (j === 2 && lastChar === "1") {
+                                
+                                        }localStrScore += lastChar;
+                                }
+                                localScore = parseInt(localScore);
+                        }
+
+                        tempHighScore = localScore + localStrScore;
+                        tempHighScoresArray.push(tempHighScore);
+                        tempHighScoresObject.score = localScore;
+                        tempHighScoresObject.scoreStr = localStrScore;
+
+                        tempHighScoresObjectsArray.push(tempHighScoresObject);
+                        tempLocalScoresArray.push(localScore);
+                        localScore = 0;
+                        localStrScore = "";
+                        tempHighScoresObject = {};     
+                }
+                tempLocalScoresArray.sort(function (a,b) {
+                        return b-a;
+                });
+                var sortedScoresCompleteArray = [];
+                var flagged = [];
+                tempLocalScoresArray.forEach(function(element) {
+                        tempHighScoresObjectsArray.forEach(function (object, index) {
+                                if(element === object.score && !flagged.includes(index)) {
+                                        flagged.push(index);
+                                
+                                var tempScoreString = object.scoreSTr = " " + object.score;
+                        sortedScoresCompleteArray.push(tempScoreString);
+                        }
+                        });
+                });
+                for (i = 0; i < sortedScoresCompleteArray.length; i++) {
+                        var highScoreElement = document.createElement("li");
+                        highsScoreElement.textContent = sortedScoresCompleteArray[i];
+                        for (j = sortedScoresCompleteArray[i].length - 1; j >= 0; j--) {
+                                lastPos = sortedScoresCompleteArray[i].length -1;
+                                lastChar = sortedScoresCompleteArray[i][lastPos - j];
+                                if(lastChar && lastChar >= 0 && lastChar <= 9) {
+                                        localScore += lastChar;
+                                }
+                                if (j > 1) {
+                                        localStrScore += lastChar;
+                                }
+                                localScore = parseInt(localScore);
+                        }
+                        tempHighScore = localScore + localStrScore;
+
+                        if(localScore > 80 && localScore <= 100) {
+                                highScoreElement.setAttribute("class", "list-group-item list-group-item-success");
+                        }else if (localScore > 70 && localScore <= 80) {
+                                highScoreElement.setAttribute("class", "list-group-item list-group-item-info");
+                        }else if (localScore > 60 && localScore <= 70) {
+                                highsScoreElement.setAttribute("class", "list-group-item list-group-item-primary");
+                        }else if (localScore > 50 && localScore <= 60) {
+                                highsScoreElement.setAttribute("class", "list-group-item list-group-item-warning");
+                        }else if (localScore <= 50) {
+                                highScoreElement.setAttribute("class", "list-group-item list-group-item-danger");
+                        }
+
+                        highScoresList.append(highScoreElement);
+                        tempHighScoresArray.push(tempHighScore);
+                        tempHighScoresObject.score = localScore;
+                        tempHighScoresObject.scoreStr = localStrScore;
+                        tempHighScoresObjectsArray.push(tempHighScoresObject);
+                        tempLocalScoresArray.push(localScore);
+                        localScore = 0;
+                        localStrScore = "";
+                        tempHighScoresObject = {};
                 }
         }
+        function clearHighScores() {
+                localHighScoresArray = [];
+                localStoreage.setItem("highscore", localHighScoresArray);
+                loadHighScores();
+        }         
 }

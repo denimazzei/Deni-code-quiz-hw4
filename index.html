@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/style.css" />
+
+    <!--Bootstrap-->
     <link
     rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-    crossorigin="anonymous"
-  />
+    crossorigin="anonymous"/>
+
+    <link rel="stylesheet" href="assets/style.css" />
+
     <title>Code Quiz</title>
 </head>
 <body>
@@ -18,7 +21,9 @@
         <header class="col text-center p-4" id="title">
             <h1>Coding Quiz Challenge</h1>
         </header>
-    <section
+    
+    
+        <section
         class="modal fade"
         id="staticBackdrop"
         data-backdrop="static"
@@ -50,7 +55,7 @@
                     <button
                     type="button"
                     class="btn btn-primary"
-                    id="clearHighScoresBtn"></button>
+                    id="clearHighScoresBtn">Clear High Scores</button>
                 </div>
             </div>
         </div>
@@ -60,14 +65,16 @@
         <section class="card-header pt-0 pb-0">
             <div class="row row-cols-2">
                 <div class="col">
+
                     <a style="text-decoration: none;"
                     id="viewHighScores"
                     data-toggle="modal"
                     data-target="#staticBackdrop"
                     href="#">View High Scores</a>
+
                 </div>
                 <div class="col text-right">
-                    <p class="mb-0" id="timeP">Time Remainining <strong><span id="timeSpan"></span></strong></p>
+                    <p class="mb-0" id="timeP">Time Remaining <strong><span id="timeSpan"></span></strong></p>
                 </div>
             </div>
         </section>
@@ -81,12 +88,12 @@
                     <p class="card-text">NOTE: Incorrect answers will be penalized 3 seconds!</p>
                 </div>
             </section>
-            <a href="#" class="btn btn-primary" id="start">Click Here to Start</a>
+            <a href="#" class="btn btn-primary btn-block" id="startBtn">Click Here to Start</a>
 
         
     <!--Quiz Section-->
-    <section id="quiz">
-            <h2 id="question">Question 1></h2>
+    <section id="quiz" style="display:none">
+            <h5 id="question"></h5>
             <div class="row row-cols-1 row-cols-md-2">
                 <div id="col">
                      <div class="list-group mb-4" id="answers"></div>
@@ -98,11 +105,11 @@
 
     <!--Quiz Completed-->
        
-    <section id="allDone">
+    <section id="allDone" style="display: none;">
         <div class="alert alert-success mt=0 mb-0">
-            <h3 class="alert-heading">All Done!</h3>
+            <h4 class="alert-heading">Quiz Complete!</h4>
             <hr />
-            <h4 class="mb-0">Here's Your Final Score <span id="finalScore">xx</span></h4>
+            <h5 class="mb-0">Here's Your Final Score <span id="finalScore"></span></h5>
             <hr />
             <form class="form-inline">
                 <input
@@ -115,6 +122,8 @@
             </form>
         </div>
     </section>
+</section>
+    
     
     <div class="card-footer text muted p-0">
         <div class="progress" style="height: 100%;">
@@ -125,6 +134,28 @@
         <strong></strong>
     </div>
 
-    <script src="Javascript/javascript.js"></script>
-</body>
+    <!--jQuery-->  
+        <script
+        src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"
+    ></script>
+
+    <!-- Popper -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"
+    ></script>
+
+    <!-- Bootstrap -->
+    <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"
+    ></script>
+
+
+        <script src="Javascript/javascript.js"></script>
+    </body>
 </html>
